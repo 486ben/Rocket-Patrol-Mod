@@ -36,12 +36,12 @@ class Play extends Phaser.Scene {
       this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
       this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
 
-      // add spaceships (x3)
+      // add books (x3)
       this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
       this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
       this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
 
-      // spaceship-X
+      // teacher help 
       //spaceship-X is 100 point.
       this.ship04 = new Spaceship_x(this, game.config.width, borderUISize*2 + borderPadding*4, 'spaceship-x', 0,100).setOrigin(0, 0);
 
