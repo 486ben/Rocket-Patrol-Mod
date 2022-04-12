@@ -10,11 +10,11 @@ class Menu extends Phaser.Scene {
 
     preload() {
         //load the background for menu
-        this.load.image('starfield', './assets/starfield1.png');
+        this.load.image('starfield', './assets/background.png');
         // load audio
         this.load.audio('sfx_select', './assets/blip_select12.wav');
-        this.load.audio('sfx_explosion', './assets/explosion38.wav');
-        this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
+        this.load.audio('sfx_explosion', './assets/finish.mp3');
+        this.load.audio('sfx_rocket', './assets/study.mp3');
     }
 
 
@@ -22,7 +22,7 @@ class Menu extends Phaser.Scene {
         // menu text configuration
         let menuConfig = {
             fontFamily: 'Fantasy',
-            fontSize: '25px',
+            fontSize: '35px',
             backgroundColor: 'blue',
             color: '#f5f500',
             align: 'right',
@@ -36,7 +36,7 @@ class Menu extends Phaser.Scene {
         //show background
         this.add.tileSprite(0, 0, 1500, 850, 'starfield').setOrigin(0, 0);
         // show menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Welcome to UCSC CSE101 and CPMP120', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Welcome to "Hit the book Patrol"', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2, 'The ←→ or A,D arrows is move & push F,M for fire', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = 'blue';
         menuConfig.color = 'yellow';

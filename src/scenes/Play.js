@@ -60,7 +60,7 @@ class Play extends Phaser.Scene {
       this.anims.create({
         key: 'explode',
         frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 20, first: 0}),
-        frameRate: 15
+        frameRate: 5
       });
 
       // initialize score
@@ -70,8 +70,8 @@ class Play extends Phaser.Scene {
       let scoreConfig = {
       fontFamily: 'Courier',
       fontSize: '28px',
-      backgroundColor: '#F3B141',
-      color: '#843605',
+      backgroundColor: 'blue',
+      color: 'yellow',
       align: 'right',
       padding: {
         top: 5,
@@ -87,8 +87,8 @@ class Play extends Phaser.Scene {
     // 60-second play clock
     scoreConfig.fixedWidth = 0;
     this.clock = this.time.delayedCall(60000, () => {
-      this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
-      this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
+      this.add.text(game.config.width/2, game.config.height/2, 'It is time to quiz!', scoreConfig).setOrigin(0.5);
+      this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to restudy or ← for Quiz!', scoreConfig).setOrigin(0.5);
       this.gameOver = true;
     }, null, this);
 
@@ -189,10 +189,10 @@ class Play extends Phaser.Scene {
 
   preload() {
       // load images/tile sprites
-      this.load.image('rocket', './assets/rocket1.png');
-      this.load.image('spaceship', './assets/spaceship1.png');
+      this.load.image('rocket', './assets/pen.png');
+      this.load.image('spaceship', './assets/book.png');
       this.load.image('spaceship-x', './assets/spaceship-x.png');
-      this.load.image('starfield', './assets/starfield1.png');
+      //this.load.image('starfield', './assets/starfield1.png');
       // load spritesheet
       this.load.spritesheet('explosion', './assets/explore.png', {frameWidth: 500, frameHeight: 500, startFrame: 0, endFrame: 500});
     }
