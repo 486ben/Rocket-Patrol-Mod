@@ -22,7 +22,7 @@ class Menu extends Phaser.Scene {
         // menu text configuration
         let menuConfig = {
             fontFamily: 'Fantasy',
-            fontSize: '35px',
+            fontSize: '25px',
             backgroundColor: 'blue',
             color: '#f5f500',
             align: 'right',
@@ -36,12 +36,12 @@ class Menu extends Phaser.Scene {
         //show background
         this.add.tileSprite(0, 0, 1500, 850, 'starfield').setOrigin(0, 0);
         // show menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Welcome to Rocket Patrol 2.0', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'The ←→ arrows is move & push F for fire', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Welcome to UCSC CSE101 and CPMP120', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2, 'The ←→ or A,D arrows is move & push F,M for fire', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = 'blue';
         menuConfig.color = 'yellow';
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← or → to start the Game!', menuConfig).setOrigin(0.5);
-
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← with one player or → with two players ', menuConfig).setOrigin(0.5);
+        
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -49,24 +49,26 @@ class Menu extends Phaser.Scene {
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-          // easy mode
-          game.settings = {
-            spaceshipSpeed: 3,
-            gameTimer: 60000    
-          }
-          this.sound.play('sfx_select');
-          this.scene.start('playScene');    
+      if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+        // One person mode
+        game.settings = {
+          spaceshipSpeed: 3,
+          gameTimer: 60000,
+          players: 1    
         }
-        if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-          // hard mode
-          game.settings = {
-            spaceshipSpeed: 5,
-            gameTimer: 45000    
-          }
-          this.sound.play('sfx_select');
-          this.scene.start('playScene');    
-        }
+        this.sound.play('sfx_select');
+        this.scene.start("playScene");   
       }
+      if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
+        // Two player battle mode
+        game.settings = {
+          spaceshipSpeed: 5,
+          gameTimer: 45000,
+          players: 2
+        }
+        this.sound.play('sfx_select');
+        this.scene.start("playScene");  
+      }
+    }
 
 }

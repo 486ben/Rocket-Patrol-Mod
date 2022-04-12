@@ -19,14 +19,22 @@ class Play extends Phaser.Scene {
       // green UI background
       this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
      
+      //check if two player
+      if(game.settings.players == 2) {
+        // if two player, just add rocket (p1) and (p2)
+        this.p2Rocket = new Rocket1(this, game.config.width - 200, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+        this.p1Rocket = new Rocket(this, game.config.width - 400, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+      }
+      else {
+        // if one player only, just add rocket (p1)
+        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+      }
+
       // white borders
       this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
       this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
       this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
       this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
-
-      // add rocket (p1)
-      this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
 
       // add spaceships (x3)
       this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
@@ -38,16 +46,21 @@ class Play extends Phaser.Scene {
       this.ship04 = new Spaceship_x(this, game.config.width, borderUISize*2 + borderPadding*4, 'spaceship-x', 0,100).setOrigin(0, 0);
 
       // define keys
-      keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-      keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+      //player 1
+      keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
       keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
       keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+      keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+      //player 2
+      keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+      keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+      keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
       // animation config
       this.anims.create({
         key: 'explode',
-        frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
-        frameRate: 30
+        frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 20, first: 0}),
+        frameRate: 15
       });
 
       // initialize score
@@ -95,6 +108,9 @@ class Play extends Phaser.Scene {
       this.starfield.tilePositionX -= 4;
       if (!this.gameOver) {
         this.p1Rocket.update();
+        if(game.settings.players == 2) { 
+          this.p2Rocket.update();     
+      }  
         // update spaceships (x3)
         this.ship01.update();
         this.ship02.update();
@@ -119,6 +135,25 @@ class Play extends Phaser.Scene {
     this.p1Rocket.reset();
     this.shipExplode(this.ship01);
   }
+  //for two players, add one more rocket
+  if(game.settings.players == 2) { 
+    if(this.checkCollision(this.p2Rocket, this.ship04)) {
+      this.p2Rocket.reset();
+      this.shipExplode(this.ship04);   
+    }
+    if(this.checkCollision(this.p2Rocket, this.ship03)) {
+        this.p2Rocket.reset();
+        this.shipExplode(this.ship03);
+    }
+    if (this.checkCollision(this.p2Rocket, this.ship02)) {
+        this.p2Rocket.reset();
+        this.shipExplode(this.ship02);
+    }
+    if (this.checkCollision(this.p2Rocket, this.ship01)) {
+        this.p2Rocket.reset();
+        this.shipExplode(this.ship01);
+    }
+}
 
   
 }
@@ -159,6 +194,6 @@ class Play extends Phaser.Scene {
       this.load.image('spaceship-x', './assets/spaceship-x.png');
       this.load.image('starfield', './assets/starfield1.png');
       // load spritesheet
-      this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+      this.load.spritesheet('explosion', './assets/explore.png', {frameWidth: 500, frameHeight: 500, startFrame: 0, endFrame: 500});
     }
   }
