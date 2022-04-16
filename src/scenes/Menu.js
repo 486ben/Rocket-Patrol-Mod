@@ -13,8 +13,8 @@ class Menu extends Phaser.Scene {
         this.load.image('starfield', './assets/background.png');
         // load audio
         this.load.audio('sfx_select', './assets/blip_select12.wav');
-        this.load.audio('sfx_explosion', './assets/finish.mp3');
-        this.load.audio('sfx_rocket', './assets/study.mp3');
+        this.load.audio('sfx_explosion', './assets/finish.wav');
+        this.load.audio('sfx_rocket', './assets/study.wav');
     }
 
 
