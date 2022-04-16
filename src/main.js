@@ -19,7 +19,7 @@
 let config = {
   type: Phaser.AUTO,
   width: 1500,
-  height: 980,
+  height: 860,
   scene: [ Menu, Play ]
 }
 
