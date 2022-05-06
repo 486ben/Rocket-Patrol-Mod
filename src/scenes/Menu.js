@@ -10,7 +10,7 @@ class Menu extends Phaser.Scene {
 
     preload() {
         //load the background for menu
-        this.load.image('starfield', './assets/background.png');
+        this.load.image('starfield', './assets/background1.png');
         // load audio
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/finish.wav');

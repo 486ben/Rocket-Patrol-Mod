@@ -14,11 +14,12 @@
 
 //I also get some help from the source. Here is the citation.
 // music free from: https://elements.envato.com/
+//second music free from: https://freesound.org/
 
 
 let config = {
   type: Phaser.AUTO,
-  width: 1500,
+  width: 1200,
   height: 860,
   scene: [ Menu, Play ]
 }
